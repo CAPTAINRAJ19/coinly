@@ -1,1 +1,11 @@
+@font-face {
+    font-family: cursiva;
+    src: url("../src/assets/fonts/DancingScript-Regular.ttf");
+}
 @import "tailwindcss";
+@theme {
+  --font-primary: "Dancing Script", cursive;
+}
+@theme {
+  --font-cursiva: cursiva,"sans-serif";
+}

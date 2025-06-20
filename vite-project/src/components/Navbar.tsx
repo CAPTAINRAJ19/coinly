@@ -15,6 +15,8 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
+  console.log("User info:", user);
+
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -69,6 +71,14 @@ const Navbar: React.FC = () => {
       navigate('/signup'); // Navigate for email signup
     }
   };
+
+  // 👇 Added fallback URL using UI Avatars service
+  const fallbackUrl = user?.displayName
+  ? `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName)}&background=random&rounded=true&size=80`
+  : "/default-profile.png";
+
+const profilePic = user?.photoURL && user.photoURL.trim() !== '' ? user.photoURL : fallbackUrl;
+
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 backdrop-blur-md border-b border-green-400/20' : 'bg-black'}`}>
@@ -143,7 +153,16 @@ const Navbar: React.FC = () => {
                 <>
                   <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm">Logout</button>
                   <span className="text-sm text-green-400">Hello, {user.displayName?.split(' ')[0] || 'User'}</span>
-                  <img src={user.photoURL || '/default-profile.png'} alt="Profile" className="w-8 h-8 rounded-full object-cover" />
+<img
+  src={profilePic}
+  onError={(e) => {
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = fallbackUrl;
+  }}
+  alt="Profile"
+  className="w-8 h-8 rounded-full object-cover"
+/>
+
                 </>
               ) : (
                 <>
@@ -157,7 +176,16 @@ const Navbar: React.FC = () => {
           {/* Mobile toggle with user image */}
           <div className="md:hidden flex items-center space-x-3">
             {user && (
-              <img src={user.photoURL || '/default-profile.png'} alt="User" className="w-8 h-8 rounded-full object-cover" />
+<img
+  src={profilePic}
+  onError={(e) => {
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = fallbackUrl;
+  }}
+  alt="Profile"
+  className="w-8 h-8 rounded-full object-cover"
+/>
+
             )}
             <button onClick={() => setIsOpen(!isOpen)} className="text-gray-300">{isOpen ? <X /> : <Menu />}</button>
           </div>
@@ -191,7 +219,16 @@ const Navbar: React.FC = () => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-green-400">Hello, {user.displayName?.split(' ')[0] || 'User'}</span>
-                    <img src={user.photoURL || '/default-profile.png'} alt="Profile" className="w-8 h-8 rounded-full object-cover" />
+<img
+  src={profilePic}
+  onError={(e) => {
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = fallbackUrl;
+  }}
+  alt="Profile"
+  className="w-8 h-8 rounded-full object-cover"
+/>
+
                   </div>
                   <button onClick={handleLogout} className="block w-full mt-2 bg-red-500 text-white px-3 py-1.5 rounded hover:bg-red-600">Logout</button>
                 </div>

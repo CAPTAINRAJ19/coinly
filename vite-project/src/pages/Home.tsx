@@ -1,4 +1,3 @@
-import React from 'react'
 import CoinlyHero from '../components/HeroSection'
 
 function Home() {

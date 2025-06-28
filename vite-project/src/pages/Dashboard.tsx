@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { auth } from '../firebase'; // Updated path - remove '/config'
 import type { User } from 'firebase/auth'; // Type-only import
 

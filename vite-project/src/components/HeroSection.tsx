@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import coinImage from '../assets/images/coin.png';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   TrendingUp, 
   Target, 
@@ -14,7 +14,7 @@ import {
 
 const CoinlyHero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const controls = useAnimation();
+  // const controls = useAnimation();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
